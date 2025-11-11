@@ -1,9 +1,9 @@
-const fillValue = (obj, field, value) => {
+const insertField = (field, value, obj) => {
   obj[field] = value;
   return obj;
 };
 
-const fillEmptyObjects = (count) => {
+const placeholder = (count) => {
   const filled = [];
   for (let index = 0; index < count; index++) {
     filled.push({});
@@ -12,17 +12,19 @@ const fillEmptyObjects = (count) => {
   return filled;
 };
 
-const group = (details) => {
-  const detailCount = Object.values(details)[0].length;
-  const gameDetails = fillEmptyObjects(detailCount);
+const group = (fields = {}) => {
+  const fieldsCount = Object.values(fields)[0].length;
+  const gameDetails = placeholder(fieldsCount);
 
-  for (const key in details) {
+  for (const field in fields) {
     let index = 0;
 
-    for (const element of details[key]) {
+    for (const element of fields[field]) {
       const game = gameDetails[index++];
-      fillValue(game, key, element);
+
+      insertField(field, element, game);
     }
+
   }
 
   return gameDetails;
@@ -95,10 +97,9 @@ const main = () => {
     'Action / Samurai',
     'Horror / Thriller'
   ];
+  const gameDetails = { name: games, genre: genres, publisher: publishers };
 
-  const details = { name: games, genres, publishers };
-  const grouped = group(details);
-
+  const grouped = group(gameDetails);
 
   console.log('grouped', grouped);
 };
