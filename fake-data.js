@@ -1,7 +1,5 @@
-const gameDetail = (field, value) => {
-  const obj = {};
-  console.log(field, value);
-
+const fillValue = (obj, field, value) => {
+  obj[field] = value;
   return obj;
 };
 
@@ -15,14 +13,18 @@ const fillEmptyObjects = (count) => {
 };
 
 const group = (details) => {
-  const gameDetails = fillEmptyObjects(Object.values(details)[0].length);
-  console.log(gameDetails);
+  const detailCount = Object.values(details)[0].length;
+  const gameDetails = fillEmptyObjects(detailCount);
+
   for (const key in details) {
-    // console.log(key, details[key]);
+    let index = 0;
+
     for (const element of details[key]) {
-      gameDetail(key, element);
+      const game = gameDetails[index++];
+      fillValue(game, key, element);
     }
   }
+
   return gameDetails;
 };
 
@@ -48,7 +50,7 @@ const main = () => {
     'Mass Effect Legendary Edition',
     'Ghost of Tsushima',
     'Alan Wake 2'
-  ].slice(0, 2);
+  ];
   const publishers = [
     'Capcom',
     'Bethesda Softworks',
@@ -92,13 +94,13 @@ const main = () => {
     'RPG / Sci-Fi',
     'Action / Samurai',
     'Horror / Thriller'
-  ].slice(0, 2);
+  ];
 
-  const details = { games, genres };
+  const details = { name: games, genres, publishers };
   const grouped = group(details);
 
 
-  console.log(grouped);
+  console.log('grouped', grouped);
 };
 
 main();
