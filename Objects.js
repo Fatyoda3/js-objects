@@ -18,6 +18,11 @@ const dog = {
       console.log(`woof `);
     }
   }
-
+};
+const getNewDog = (name, age, color) => {
+  console.log('Dog created with name-', name);
+  return { name: name, age: age, color: color };
 };
 
+const Olive = getNewDog('Olive', 3, 'purple');
+console.log(Olive);
