@@ -3,18 +3,17 @@ const insertField = (field, value, obj) => {
   return obj;
 };
 
-const placeholder = (count) => {
+const generatePlaceholders = (count) => {
   const filled = [];
-  for (let index = 0; index < count; index++) {
+  for (let index = 0; index < count; index++)
     filled.push({});
-  }
 
   return filled;
 };
 
 const group = (fields = {}) => {
   const fieldsCount = Object.values(fields)[0].length;
-  const gameDetails = placeholder(fieldsCount);
+  const gameDetails = generatePlaceholders(fieldsCount);
 
   for (const field in fields) {
     let index = 0;
