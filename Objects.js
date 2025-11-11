@@ -27,7 +27,8 @@ const makeDog = (name, age, color) => {
         barks.push('woof-' + barkThis);
       }
       console.log(barks.join('\n'));
-    }
+    },
+    'it_got_rabies': true,
   };
 };
 
@@ -41,10 +42,15 @@ const makeMan = (name, age, color) => {
     }
   };
 };
+const removeProp = (object, prop) => delete object[prop];
+
 const main = () => {
   const Olive = makeDog('Olive', 3, 'purple');
-  console.log(formattedDetails.animalLogger(Olive));
-  Olive.bark(3, 'what\'s up');
+  // console.log(formattedDetails.animalLogger(Olive));
+  // Olive.bark(3, 'what\'s up');
+  console.log(Olive);
+  removeProp(Olive, 'it_got_rabies');
+  console.log(Olive);
 
 };
 main();
