@@ -10,26 +10,41 @@ employed-${person.isEmployed}`,
 age-${animal.age},
 name-${animal.name} , 
 color-${animal.color}`,
-
 };
 
-const person = { name: 'Shivang', age: 22, isEmployed: true && false };
-console.log(formattedDetails.personLogger(person));
-
-const dog = {
-  name: "Jack",
-  age: 12,
-  color: 'hazy',
-  bark: (count) => {
-    for (let index = 0; index < count; index++) {
-      console.log(`woof `);
-    }
-  }
-};
-const getNewDog = (name, age, color) => {
+const makeDog = (name, age, color) => {
   console.log('Dog created with name-', name);
-  return { name: name, age: age, color: color };
+
+  return {
+    name: name,
+    age: age,
+    color: color,
+
+    bark: (count, barkThis) => {
+      const barks = [];
+
+      for (let index = 0; index < count; index++) {
+        barks.push('woof-' + barkThis);
+      }
+      console.log(barks.join('\n'));
+    }
+  };
 };
 
-const Olive = getNewDog('Olive', 3, 'purple');
-console.log(formattedDetails.animalLogger(Olive));
+const makeMan = (name, age, color) => {
+  console.log('Man created with name-', name);
+  return {
+    name: name, age: age, color: color, bark: (count, barkThis) => {
+      for (let index = 0; index < count; index++) {
+        console.log(`woof `, barkThis);
+      }
+    }
+  };
+};
+const main = () => {
+  const Olive = makeDog('Olive', 3, 'purple');
+  console.log(formattedDetails.animalLogger(Olive));
+  Olive.bark(3, 'what\'s up');
+
+};
+main();
