@@ -3,7 +3,7 @@ const insertField = (field, value, obj) => {
   return obj;
 };
 
-const generatePlaceholders = (count) => {
+const placeholders = (count = 0) => {
   const filled = [];
   for (let index = 0; index < count; index++)
     filled.push({});
@@ -12,21 +12,21 @@ const generatePlaceholders = (count) => {
 };
 
 const group = (fields = {}) => {
-  const fieldsCount = Object.values(fields)[0].length;
-  const gameDetails = generatePlaceholders(fieldsCount);
+  const fieldCount = Object.values(fields)[0].length;
+  const groupedInfo = placeholders(fieldCount);
 
   for (const field in fields) {
     let index = 0;
 
     for (const element of fields[field]) {
-      const game = gameDetails[index++];
+      const game = groupedInfo[index++];
 
       insertField(field, element, game);
     }
 
   }
 
-  return gameDetails;
+  return groupedInfo;
 };
 
 const main = () => {
@@ -96,6 +96,7 @@ const main = () => {
     'Action / Samurai',
     'Horror / Thriller'
   ];
+
   const gameDetails = { name: games, genre: genres, publisher: publishers };
 
   const grouped = group(gameDetails);
