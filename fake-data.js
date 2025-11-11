@@ -108,18 +108,23 @@ const platforms = [
   ['PS5', 'PC'],
   ['PS5', 'Xbox Series X/S', 'PC']
 ];
-const detailOfGame = (...info) => { };
+
+const gameDetail = (detailFields, details, current) => {
+  const gameDetail = {};
+  let i = 0;
+
+  for (const key of detailFields) {
+    gameDetail[key] = details[i++][current];
+  }
+  return gameDetail;
+};
 
 const genDetailOfGames = (...details) => {
   const gameDetails = [];
   const detailFields = ['name', 'genre', 'released', 'publisher', 'platforms'];
 
   for (let current = 0; current < details[0].length; current++) {
-    const gameDetail = {};
-    let i = 0;
-    for (const key of detailFields) {
-      gameDetail[key] = details[i++][current];
-    }
+    const gameDetail = gameDetail(detailFields, details, current);
     gameDetails.push(gameDetail);
   }
 
