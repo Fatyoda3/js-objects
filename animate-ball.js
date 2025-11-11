@@ -1,45 +1,69 @@
-const BALL = {
-  symbol: 'o',
-  x: 0, y: 0,
-  xVel: Math.floor(Math.random() * 2 + 1), yVel: Math.floor(Math.random() * 2 + 1),
-
-};
-
+const BALLS = [
+  {
+    symbol: 'o',
+    pos: [0, 0],
+    vel: [1, 1],
+    trail: []
+  },
+  {
+    symbol: 'x',
+    pos: [5, 5],
+    vel: [1, 2],
+    trail: []
+  }, {
+    symbol: '*',
+    pos: [2, 5],
+    vel: [1, 2],
+    trail: []
+  }
+];
 const CELL = ' ';
+const DIMENSION = 100;
 
-const DIMENSION = 20;
-
-const generateGrid = (x, y) => {
+const generateGrid = (objects) => {
   const grid = [];
   const row = CELL.repeat(DIMENSION);
 
   for (let i = 0; i < DIMENSION; i++) {
-    grid.push(row.split(','));
+    grid.push(row.split(''));
   }
-  console.log(grid[0]);
-  console.log(grid[x][y] = BALL.symbol, 'grid cell at  0 0 ');
 
-  return grid.join('\n');
+  for (const obj of objects) {
+    for (const t of obj.trail) {
+      grid[t[0]][t[1]] = '`';
+    }
+    grid[obj.pos[0]][obj.pos[1]] = obj.symbol;
+  }
+
+  return grid.map(x => x.join('')).join('\n');
 };
 const delay = (() => { for (let _ = 0; _ < 10e8; _++); });
 
-const animate = () => {
+const animate = (drawFn) => {
 
-  // for (let _ = 0; _ < 500; _++) {
-
-  //   BALL.x = (BALL.x + BALL.xVel) % DIMENSION;
-  //   BALL.y = (BALL.y + BALL.yVel) % DIMENSION;
-
-  console.log(generateGrid(BALL.x, BALL.y));
-
-  //   delay();
-
-  //   console.clear();
-  // }
-
+  while (true) {
+    delay();
+    console.clear();
+    console.log(drawFn());
+  }
 };
+
+const updateBall = (ball) => {
+  const oldPos = ball.pos.slice();
+  for (const i in ball.pos) {
+    ball.pos[i] = (ball.pos[i] + ball.vel[i]) % DIMENSION;
+  }
+  ball.trail.push(oldPos);
+  ball.trail = ball.trail.slice(-4);
+};
+
 const main = () => {
 
-  animate();
+  animate(() => {
+    BALLS.forEach(updateBall);
+    return generateGrid(BALLS);
+  });
+
+  // generateGrid(20, 18);
 };
 main();
