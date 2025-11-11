@@ -96,8 +96,57 @@ const main = () => {
     'Action / Samurai',
     'Horror / Thriller'
   ];
-
-  const gameDetails = { name: games, genre: genres, publisher: publishers };
+  const releaseYears = [
+    2023,
+    2023,
+    2024,
+    2021,
+    2013,
+    2022,
+    2023,
+    2022,
+    2020,
+    2018,
+    2015,
+    2022,
+    2024,
+    2023,
+    2023,
+    2023,
+    2023,
+    2021,
+    2020,
+    2023
+  ];
+  const platforms = [
+    ['PS5', 'Xbox Series X/S', 'PC'],
+    ['Xbox Series X/S', 'PC'],
+    ['PS5', 'PC'],
+    ['Xbox Series X/S', 'PC'],
+    ['PS4', 'Xbox One', 'PC'],
+    ['PS5', 'Xbox Series X/S', 'PC'],
+    ['Nintendo Switch'],
+    ['PS5'],
+    ['PS5', 'Xbox Series X/S', 'PC'],
+    ['PS4', 'Xbox One', 'PC'],
+    ['PS4', 'Xbox One', 'Switch', 'PC'],
+    ['PS5', 'PS4'],
+    ['PS5'],
+    ['PS5', 'Xbox Series X/S', 'PC'],
+    ['PS5', 'Xbox Series X/S', 'PC'],
+    ['PS5', 'PC'],
+    ['PS5', 'Xbox Series X/S', 'PC'],
+    ['PS4', 'Xbox One', 'PC'],
+    ['PS5', 'PC'],
+    ['PS5', 'Xbox Series X/S', 'PC']
+  ];
+  const gameDetails = {
+    name: games,
+    genre: genres,
+    publisher: publishers,
+    releaseYears,
+    platforms: platforms
+  };
 
   const grouped = group(gameDetails);
 
