@@ -32,11 +32,13 @@ const generateGrid = (objects) => {
     for (const t of obj.trail) {
       grid[t[0]][t[1]] = '`';
     }
+
     grid[obj.pos[0]][obj.pos[1]] = obj.symbol;
   }
 
   return grid.map(x => x.join('')).join('\n');
 };
+
 const delay = (() => { for (let _ = 0; _ < 10e8; _++); });
 
 const animate = (drawFn) => {

@@ -1,20 +1,28 @@
-const gameDetail = (detailFields, details, current) => {
-  const information = {};
-  let i = 0;
+const gameDetail = (field, value) => {
+  const obj = {};
+  console.log(field, value);
 
-  for (const key of detailFields) {
-    information[key] = details[i++][current];
-  }
-  return information;
+  return obj;
 };
 
-const group = (...details) => {
-  const gameDetails = [];
-  const detailFields = ['name', 'genre',/*  'released', 'publisher' */];
-  for (let current = 0; current < details[0].length; current++) {
-    gameDetails.push(gameDetail(detailFields, details, current));
+const fillEmptyObjects = (count) => {
+  const filled = [];
+  for (let index = 0; index < count; index++) {
+    filled.push({});
   }
 
+  return filled;
+};
+
+const group = (details) => {
+  const gameDetails = fillEmptyObjects(Object.values(details)[0].length);
+  console.log(gameDetails);
+  for (const key in details) {
+    // console.log(key, details[key]);
+    for (const element of details[key]) {
+      gameDetail(key, element);
+    }
+  }
   return gameDetails;
 };
 
@@ -26,7 +34,7 @@ const main = () => {
     'Halo Infinite',
     'BioShock Infinite',
     'Elden Ring',
-    'The Legend of Zelda: Tears of the Kingdom',
+    'The Legend of Zelda: TOTK',
     'God of War: Ragnarök',
     'Cyberpunk 2077',
     'Red Dead Redemption 2',
@@ -40,7 +48,7 @@ const main = () => {
     'Mass Effect Legendary Edition',
     'Ghost of Tsushima',
     'Alan Wake 2'
-  ];
+  ].slice(0, 2);
   const publishers = [
     'Capcom',
     'Bethesda Softworks',
@@ -63,28 +71,6 @@ const main = () => {
     'Sony Interactive Entertainment',
     'Epic Games / Remedy Entertainment'
   ];
-  const releaseYears = [
-    2023,
-    2023,
-    2024,
-    2021,
-    2013,
-    2022,
-    2023,
-    2022,
-    2020,
-    2018,
-    2015,
-    2022,
-    2024,
-    2023,
-    2023,
-    2023,
-    2023,
-    2021,
-    2020,
-    2023
-  ];
   const genres = [
     'Survival Horror',
     'Sci-Fi RPG',
@@ -106,10 +92,10 @@ const main = () => {
     'RPG / Sci-Fi',
     'Action / Samurai',
     'Horror / Thriller'
-  ];
+  ].slice(0, 2);
 
-  const details = [games, genres, publishers, releaseYears];
-  const grouped = group(...details);
+  const details = { games, genres };
+  const grouped = group(details);
 
 
   console.log(grouped);
